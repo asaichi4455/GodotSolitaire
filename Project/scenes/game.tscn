@@ -1,0 +1,153 @@
+[gd_scene load_steps=13 format=3 uid="uid://cfa4wn1jyq6fs"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_kcr34"]
+[ext_resource type="Texture2D" uid="uid://dm2d0uthmsnim" path="res://textures/background.png" id="1_u5mut"]
+[ext_resource type="Script" path="res://scripts/mouse_event_sender.gd" id="2_23e3h"]
+[ext_resource type="PackedScene" uid="uid://cbmoo77ks7yxx" path="res://scenes/select_difficulty.tscn" id="2_cjewi"]
+[ext_resource type="PackedScene" uid="uid://cawccwjgf3ais" path="res://scenes/information.tscn" id="3_2st2k"]
+[ext_resource type="Theme" uid="uid://c6srckg5ae4ba" path="res://themes/common.tres" id="3_6u541"]
+[ext_resource type="Texture2D" uid="uid://b32rtcgt6nb3d" path="res://textures/card.png" id="3_bkner"]
+[ext_resource type="Script" path="res://scripts/audio.gd" id="3_m4ee7"]
+[ext_resource type="Script" path="res://scripts/stock.gd" id="3_thg3c"]
+[ext_resource type="PackedScene" uid="uid://56ymxfsqjv4p" path="res://scenes/mouse_event_receiver.tscn" id="8_drvlh"]
+[ext_resource type="Shape2D" uid="uid://3ofvf7ufk6xe" path="res://resources/card_shape_2d.tres" id="9_ioawy"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_2hjk1"]
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("_select_difficulty", "_new_game_button", "_stock", "_waste", "_piles", "_foundations", "_information", "_audio")]
+script = ExtResource("1_kcr34")
+_select_difficulty = NodePath("SelectDifficulty")
+_new_game_button = NodePath("NewGame")
+_stock = NodePath("Stock")
+_waste = NodePath("Waste")
+_piles = NodePath("Piles")
+_foundations = NodePath("Foundations")
+_information = NodePath("Information")
+_audio = NodePath("AudioStreamPlayer")
+
+[node name="MouseEventSender" type="Node2D" parent="."]
+script = ExtResource("2_23e3h")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+script = ExtResource("3_m4ee7")
+
+[node name="Background" type="TextureRect" parent="."]
+z_index = -1
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_u5mut")
+
+[node name="Information" parent="." instance=ExtResource("3_2st2k")]
+
+[node name="NewGame" type="Button" parent="."]
+offset_left = 369.0
+offset_top = 274.0
+offset_right = 479.0
+offset_bottom = 306.0
+theme = ExtResource("3_6u541")
+text = "新しいゲーム"
+flat = true
+
+[node name="Stock" type="Sprite2D" parent="."]
+position = Vector2(7, 71)
+texture = ExtResource("3_bkner")
+centered = false
+region_enabled = true
+region_rect = Rect2(38, 364, 38, 52)
+script = ExtResource("3_thg3c")
+
+[node name="MouseEventReceiver" parent="Stock" instance=ExtResource("8_drvlh")]
+position = Vector2(19, 26)
+
+[node name="CollisionShape2D" parent="Stock/MouseEventReceiver" index="0"]
+shape = ExtResource("9_ioawy")
+
+[node name="Waste" type="Node2D" parent="."]
+position = Vector2(7, 133)
+
+[node name="Piles" type="Node2D" parent="."]
+position = Vector2(284, 72)
+
+[node name="0" type="Sprite2D" parent="Piles"]
+position = Vector2(-212, 0)
+texture = SubResource("ImageTexture_2hjk1")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 38, 232)
+
+[node name="1" type="Sprite2D" parent="Piles"]
+position = Vector2(-148, 0)
+texture = SubResource("ImageTexture_2hjk1")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 38, 232)
+
+[node name="2" type="Sprite2D" parent="Piles"]
+position = Vector2(-84, 0)
+texture = SubResource("ImageTexture_2hjk1")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 38, 232)
+
+[node name="3" type="Sprite2D" parent="Piles"]
+position = Vector2(-20, 0)
+texture = SubResource("ImageTexture_2hjk1")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 38, 232)
+
+[node name="4" type="Sprite2D" parent="Piles"]
+position = Vector2(44, 0)
+texture = SubResource("ImageTexture_2hjk1")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 38, 232)
+
+[node name="5" type="Sprite2D" parent="Piles"]
+position = Vector2(108, 0)
+texture = SubResource("ImageTexture_2hjk1")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 38, 232)
+
+[node name="6" type="Sprite2D" parent="Piles"]
+position = Vector2(172, 0)
+texture = SubResource("ImageTexture_2hjk1")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 38, 232)
+
+[node name="Foundations" type="Node2D" parent="."]
+position = Vector2(522, 72)
+
+[node name="Heart" type="Sprite2D" parent="Foundations"]
+texture = ExtResource("3_bkner")
+centered = false
+region_enabled = true
+region_rect = Rect2(266, 312, 38, 52)
+
+[node name="Diamond" type="Sprite2D" parent="Foundations"]
+position = Vector2(0, 60)
+texture = ExtResource("3_bkner")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 364, 38, 52)
+
+[node name="Club" type="Sprite2D" parent="Foundations"]
+position = Vector2(0, 120)
+texture = ExtResource("3_bkner")
+centered = false
+region_enabled = true
+region_rect = Rect2(228, 312, 38, 52)
+
+[node name="Spade" type="Sprite2D" parent="Foundations"]
+position = Vector2(0, 180)
+texture = ExtResource("3_bkner")
+centered = false
+region_enabled = true
+region_rect = Rect2(190, 312, 38, 52)
+
+[node name="SelectDifficulty" parent="." instance=ExtResource("2_cjewi")]
+z_index = 200
+
+[editable path="Stock/MouseEventReceiver"]

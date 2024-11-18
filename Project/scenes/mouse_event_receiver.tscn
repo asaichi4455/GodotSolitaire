@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://56ymxfsqjv4p"]
+
+[ext_resource type="Script" path="res://scripts/mouse_event_receiver.gd" id="1_lr5j1"]
+
+[node name="MouseEventReceiver" type="StaticBody2D"]
+script = ExtResource("1_lr5j1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

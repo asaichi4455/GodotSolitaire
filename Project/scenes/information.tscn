@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://cawccwjgf3ais"]
+
+[ext_resource type="Script" path="res://scripts/information.gd" id="1_bxqvl"]
+[ext_resource type="Theme" uid="uid://c6srckg5ae4ba" path="res://themes/common.tres" id="2_lxfm5"]
+
+[node name="Information" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_bxqvl")
+
+[node name="Time" type="Label" parent="."]
+layout_mode = 0
+offset_left = 89.0
+offset_right = 219.0
+offset_bottom = 56.0
+theme = ExtResource("2_lxfm5")
+text = "0:00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 0
+offset_left = 219.0
+offset_right = 349.0
+offset_bottom = 56.0
+theme = ExtResource("2_lxfm5")
+text = "スコア　0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Move" type="Label" parent="."]
+layout_mode = 0
+offset_left = 349.0
+offset_right = 479.0
+offset_bottom = 56.0
+theme = ExtResource("2_lxfm5")
+text = "スコア　0"
+horizontal_alignment = 1
+vertical_alignment = 1
