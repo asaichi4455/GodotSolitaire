@@ -16,8 +16,8 @@ var time: float:
         _time = value
         var t := _time as int
         var hour := t / 60 / 60
-        var minute = t / 60 % 60
-        var second = t % 60
+        var minute := t / 60 % 60
+        var second := t % 60
         _label_time.text = "%01d:%02d:%02d" % [hour, minute, second]
 
 var score: int:

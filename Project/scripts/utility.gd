@@ -96,13 +96,18 @@ static func get_connected_cards(cards: Array[CardInfo], card: CardInfo) -> Array
 
 
 static func is_game_clear(cards: Array[CardInfo], num_turn_to_waste: int) -> bool:
+    # 裏の場札がある
     if cards.any(func(c: CardInfo): return c.card_type == Define.CardType.PILE and c.is_facedown):
         return false
 
+    # 山札が残っている
     if cards.any(func(c: CardInfo): return c.card_type == Define.CardType.STOCK):
         return false
     
+    # 山札からめくったカードの中で操作できないカードがある
     var num_waste := cards.filter(func(c: CardInfo): return c.card_type == Define.CardType.WASTE).size()
+    if num_waste > Game.MAX_WASTES:
+        return false;
     if num_turn_to_waste > 1 and num_waste > 1:
         return false
 

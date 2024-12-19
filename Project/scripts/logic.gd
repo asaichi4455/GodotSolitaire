@@ -92,13 +92,15 @@ func stock_clicked() -> void:
 
         # めくられていたカードを奥に移動
         # 手前のカードのみ操作可能とする
+        for card in waste_top:
+            card.clickable = false
+        
         var num_waste_top := waste_top.size()
         var num_turn_cards := turn_cards.size()
         if num_waste_top + num_turn_cards > Game.MAX_WASTES:
             for i in waste_top.size():
                 var order: int = clampi(i - (num_waste_top + num_turn_cards - Game.MAX_WASTES), 0, Game.MAX_WASTES - 1)
                 waste_top[i].order = order
-                waste_top[i].clickable = false
                 moved_waste.emit(waste_top[i], order)
         _cards.filter(func(c: CardInfo): return c.card_type == Define.CardType.WASTE).front().clickable = true
         moved_one_step.emit(Define.CardMoveStep.STOCK_TO_WASTE)
@@ -363,7 +365,6 @@ func _drag_ended(card: CardInfo, position: Vector2) -> void:
         Define.CardType.PILE:
             var move := false
             var connected_cards: Array[CardInfo] = Utility.get_connected_cards(_cards, card)
-            var src_pile_index := card.pile_index
 
             # 場札 -> 組札の移動判定
             if connected_cards.size() == 0:
